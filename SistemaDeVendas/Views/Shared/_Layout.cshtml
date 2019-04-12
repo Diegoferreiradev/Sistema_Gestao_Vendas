@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SistemaDeVendas</title>
+    <title>Sistema para gestão de vendas</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,7 +18,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body onload="CarregaUsuarioLogado()">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -29,11 +31,15 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SistemaDeVendas</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @*<ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Login">Entrar no Sistema</a></li>
+                </ul>*@
+                @using Microsoft.AspNetCore.Http
+                @inject IHttpContextAccessor HttpContextAccessor
+                <div id="NomeUsuarioLogado"> </div>
             </div>
         </div>
     </nav>
@@ -41,7 +47,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - SistemaDeVendas</p>
+            <p>&copy; 2019 - Sistema De Vendas</p>
         </footer>
     </div>
 
@@ -67,5 +73,22 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        function CarregaUsuarioLogado()
+        {
+            var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
+            if (nome != "") {
+                var divNome = document.getElementById("NomeUsuarioLogado");
+                divNome.innerHTML = "Olá " + nome + " <a href='../Home/Login/0'> (Sair)</a>";
+                divNome.style = "color:#ffffff; padding-top:15px;";
+            }
+            else
+            {
+                window.location.href = '../Home/Login';
+            }
+        }
+    </script>
+
 </body>
 </html>
