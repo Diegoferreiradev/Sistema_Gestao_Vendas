@@ -21,13 +21,13 @@ namespace SistemaDeVendas.Models
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "Informe o Preço Unitário do produto")]
-        public decimal Preco_Unitario { get; set; }
+        public decimal? Preco_Unitario { get; set; }
 
         [Required(ErrorMessage = "Informe a Quantidade do produto")]
-        public decimal Quantidade_Estoque { get; set; }
+        public decimal? Quantidade_Estoque { get; set; }
 
         [Required(ErrorMessage = "Informe a Unidade de Medida do produto")]
-        public decimal Unidade_Medida { get; set; }
+        public string Unidade_Medida { get; set; }
 
         [Required(ErrorMessage = "Informe o Link da Imagem do produto")]
         public string Link_Foto { get; set; }
@@ -51,7 +51,7 @@ namespace SistemaDeVendas.Models
                     Descricao = dt.Rows[i]["Descricao"].ToString(),
                     Preco_Unitario = decimal.Parse(dt.Rows[i]["Preco_Unitario"].ToString()),
                     Quantidade_Estoque = decimal.Parse(dt.Rows[i]["Quantidade_Estoque"].ToString()),
-                    Unidade_Medida = decimal.Parse(dt.Rows[i]["Unidade_Medida"].ToString()),
+                    Unidade_Medida = dt.Rows[i]["Unidade_Medida"].ToString(),
                     Link_Foto = dt.Rows[i]["Link_Foto"].ToString()
 
                 };
@@ -77,7 +77,7 @@ namespace SistemaDeVendas.Models
                     Descricao = dt.Rows[0]["Descricao"].ToString(),
                     Preco_Unitario = decimal.Parse(dt.Rows[0]["Preco_Unitario"].ToString()),
                     Quantidade_Estoque = decimal.Parse(dt.Rows[0]["Quantidade_Estoque"].ToString()),
-                    Unidade_Medida = decimal.Parse(dt.Rows[0]["Unidade_Medida"].ToString()),
+                    Unidade_Medida = dt.Rows[0]["Unidade_Medida"].ToString(),
                     Link_Foto = dt.Rows[0]["Link_Foto"].ToString()
                 };
 
