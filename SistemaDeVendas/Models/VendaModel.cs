@@ -41,7 +41,7 @@ namespace SistemaDeVendas.Models
             string dataVenda = DateTime.Now.Date.ToString("yyyy/MM/dd");
 
             string sql = $"INSERT INTO Venda(data_venda, total, vendedor_id, cliente_id) " +
-                         $"VALUES ('{dataVenda}', {Total.ToString().Replace(",",".")}, {Vendedor_Id}, {Cliente_Id})";
+                         $"VALUES ('{dataVenda}',{Total},{Vendedor_Id},{Cliente_Id})";
             dal.ExecutarComandoSQL(sql);
         }
     }

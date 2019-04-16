@@ -20,6 +20,7 @@ namespace SistemaDeVendas.Controllers
         public IActionResult Registrar(VendaModel venda)
         {
             venda.Inserir();
+            CarregarDados();
             return View();
         }
 
