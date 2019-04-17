@@ -3,7 +3,7 @@
 <h2>Registrar uma Venda</h2>
 
 <form asp-controller="Venda" asp-action="Registrar">
-    <input type="hidden" asp-for="Id" value="@try { @ViewBag.Venda.Id } catch { } " />
+    @*<input type="hidden" asp-for="Id" value="@try { @ViewBag.Venda.Id } catch { } " />*@
 
     <div class="form-group">
         <label>Cliente</label>
@@ -72,7 +72,7 @@
 
     <br /><br />
 
-    <textarea asp-for="ListaProdutos" id="ListaProdutosJSON" style="display:none;"></textarea>
+    <textarea asp-for="ListaProdutos" id="ListaProdutosJSON" style="display:inline;"></textarea>
 
     <button type="submit" class="btn btn-block btn-success">Registrar</button>
 </form>
