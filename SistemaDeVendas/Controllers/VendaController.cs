@@ -9,6 +9,11 @@ namespace SistemaDeVendas.Controllers
 {
     public class VendaController : Controller
     {
+        public IActionResult Index()
+        {
+            ViewBag.ListaVendas = new VendaModel().ListagemVendas();
+            return View();
+        }
 
         public IActionResult Registrar()
         {

@@ -12,6 +12,8 @@ namespace SistemaDeVendas.Models
     {
         public string Id { get; set; }
 
+        public string Data { get; set; }
+
         public string Cliente_Id { get; set; }
 
         public string Vendedor_Id { get; set; }
@@ -19,6 +21,32 @@ namespace SistemaDeVendas.Models
         public double Total { get; set; }
 
         public string ListaProdutos { get; set; }
+
+        public List<VendaModel> ListagemVendas()
+        {
+            List<VendaModel> lista = new List<VendaModel>();
+            VendaModel item;
+            DAL dal = new DAL();
+            string sql = "SELECT v1.id, v1.data_venda, v1.total, v2.nome as vendedor, c.nome as cliente FROM" +
+                         " venda v1 INNER JOIN Vendedor v2 on v1.vendedor_id = v2.id INNER JOIN cliente c " +
+                         "on v1.cliente_id = c.id ORDER BY data_venda, total";
+            DataTable dt = dal.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new VendaModel
+                {
+                    Id = dt.Rows[i]["Id"].ToString(),
+                    Data = DateTime.Parse(dt.Rows[i]["data_venda"].ToString()).ToString("dd/MM/yyyy"),
+                    Total = double.Parse(dt.Rows[i]["total"].ToString()),
+                    Cliente_Id = dt.Rows[i]["cliente"].ToString(),
+                    Vendedor_Id = dt.Rows[i]["vendedor"].ToString()
+                };
+
+                lista.Add(item);
+            }
+            return lista;
+        }
 
 
         public List<ClienteModel> RetornarListaClientes()
