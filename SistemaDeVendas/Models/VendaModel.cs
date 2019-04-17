@@ -22,14 +22,28 @@ namespace SistemaDeVendas.Models
 
         public string ListaProdutos { get; set; }
 
+
+        public List<VendaModel> ListagemVendas(string DataDe, string DataAte)
+        {
+            return RetornarListagemVendas(DataDe, DataAte);
+        }
+
+        // Lista Geral
         public List<VendaModel> ListagemVendas()
+        {
+            return RetornarListagemVendas("1900/01/01","2100/01/01");
+        }
+
+        private List<VendaModel> RetornarListagemVendas(string DataDe, string DataAte)
         {
             List<VendaModel> lista = new List<VendaModel>();
             VendaModel item;
             DAL dal = new DAL();
-            string sql = "SELECT v1.id, v1.data_venda, v1.total, v2.nome as vendedor, c.nome as cliente FROM" +
+            string sql = " SELECT v1.id, v1.data_venda, v1.total, v2.nome as vendedor, c.nome as cliente FROM" +
                          " venda v1 INNER JOIN Vendedor v2 on v1.vendedor_id = v2.id INNER JOIN cliente c " +
-                         "on v1.cliente_id = c.id ORDER BY data_venda, total";
+                         " on v1.cliente_id = c.id" +
+                        $" WHERE v1.data_venda >='{DataDe}' and v1.data_venda <='{DataAte}' " +
+                         " ORDER BY data_venda, total";
             DataTable dt = dal.RetDataTable(sql);
 
             for (int i = 0; i < dt.Rows.Count; i++)
