@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SistemaDeVendas.Uteis
 {
@@ -26,6 +27,15 @@ namespace SistemaDeVendas.Uteis
         {
             DataTable data = new DataTable();
             SqlCommand command = new SqlCommand(sql, Connection);
+            SqlDataAdapter da = new SqlDataAdapter(command);
+            da.Fill(data);
+            return data;
+        }
+
+        public DataTable RetDataTable(SqlCommand command)
+        {
+            DataTable data = new DataTable();
+            command.Connection = Connection;
             SqlDataAdapter da = new SqlDataAdapter(command);
             da.Fill(data);
             return data;
