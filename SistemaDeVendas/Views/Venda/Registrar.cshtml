@@ -17,18 +17,6 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label>Vendedor</label>
-        <select asp-for="Vendedor_Id" class="form-control">
-            @{
-                foreach (var item in (List<VendedorModel>)ViewBag.ListaVendedores)
-                {
-                    <option value="@item.Id">@item.Nome</option>
-                }
-            }
-        </select>
-    </div>
-
     <label>Produtos</label>
     <br /><br />
     <div class="form-group">
